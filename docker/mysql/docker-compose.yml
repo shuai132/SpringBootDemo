@@ -1,0 +1,16 @@
+version: "3"
+services:
+  mysql:
+    container_name: SpringBootDemo-mysql
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    volumes:
+      - ../../../SpringBootDemo_DATA/mysql/logs:/logs
+      - ../../../SpringBootDemo_DATA/mysql/conf:/etc/mysql/conf.d
+      - ../../../SpringBootDemo_DATA/mysql/mysql:/var/lib/mysql
+      - ./initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    tty: true
+    restart: unless-stopped
