@@ -2,12 +2,14 @@ package com.example.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity(name = "user")
+@Data
 public class UserTable implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,31 +21,7 @@ public class UserTable implements Serializable {
     private String name;
 
     @Column
-    @JsonProperty("create_at")
     @ApiModelProperty(example = Const.DATETIME_EXAMPLE)
+    @JsonProperty("create_at")
     private Timestamp createAt;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Timestamp getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Timestamp createAt) {
-        this.createAt = createAt;
-    }
 }

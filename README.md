@@ -39,7 +39,8 @@ CREATE DATABASE IF NOT EXISTS SpringBootDemo CHARSET utf8mb4 COLLATE utf8mb4_090
 在项目同级目录下会创建"SpringBootDemo_DATA"文件夹，用于存放日志和相关docker宿主目录绑定。
 
 # 其他
-与项目名称有关的配置都以"SpringBootDemo"开头，所以修改项目名称时，替换成自己想要的名称即可。
+* 与项目名称有关的配置都以"SpringBootDemo"开头，所以修改项目名称时，替换成自己想要的名称即可。
+* IDE需配置Lombok相关插件，并开启Java注解处理器(Enable annotation processors)。
 
 # Links
 * [官方API](https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/api/)
