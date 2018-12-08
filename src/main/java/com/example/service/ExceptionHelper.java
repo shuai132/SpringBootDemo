@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.response.BaseResponse;
+import com.example.response.Response;
 import com.example.response.ErrorMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 @Service
 public final class ExceptionHelper {
-    private Logger logger;
+    public Logger logger;
 
     public ExceptionHelper() {
         logger = LoggerFactory.getLogger(ExceptionHelper.class);
@@ -25,17 +25,17 @@ public final class ExceptionHelper {
         this.logger = logger;
     }
 
-    public <T> BaseResponse<T> handle(Supplier<T> result, @Nullable ErrorMsg errorMsg) {
+    public <T> Response<T> handle(Supplier<T> result, @Nullable ErrorMsg errorMsg) {
         try {
             T t = result.get();
-            return BaseResponse.create(t);
+            return Response.of(t);
         } catch (Exception e) {
             logger.error(e.toString(), e);
-            return BaseResponse.create(errorMsg != null ? errorMsg : new ErrorMsg(0, "no message set!"));
+            return Response.of(errorMsg != null ? errorMsg : ErrorMsg.of(e.getMessage()));
         }
     }
 
-    public <T> BaseResponse<T> handle(Supplier<T> result) {
+    public <T> Response<T> handle(Supplier<T> result) {
         return handle(result, null);
     }
 }

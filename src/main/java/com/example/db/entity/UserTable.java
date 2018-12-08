@@ -1,5 +1,6 @@
 package com.example.db.entity;
 
+import com.example.utils.Const;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -19,6 +20,9 @@ public class UserTable implements Serializable {
     @Column(nullable = false)
     @JsonProperty("name")
     private String name;
+
+    @JsonProperty("age")
+    private Integer age;
 
     @Column
     @ApiModelProperty(example = Const.DATETIME_EXAMPLE)

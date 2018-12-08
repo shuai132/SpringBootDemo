@@ -1,8 +1,10 @@
 package com.example.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
-public class BaseResponse<T> {
+@Data
+public class Response<T> {
     @JsonProperty("data")
     private final T data;
 
@@ -12,23 +14,27 @@ public class BaseResponse<T> {
     @JsonProperty("error_msg")
     private final ErrorMsg errorMsg;
 
-    private BaseResponse(T data) {
+    private Response(T data) {
         this.data = data;
         this.errorMsg = null;
         this.success = true;
     }
 
-    private BaseResponse(ErrorMsg errorMsg) {
+    private Response(ErrorMsg errorMsg) {
         this.errorMsg = errorMsg;
         this.data = null;
         this.success = false;
     }
 
-    public static <T> BaseResponse<T> create(T value) {
-        return new BaseResponse<>(value);
+    public static <T> Response<T> of(T value) {
+        return new Response<>(value);
     }
 
-    public static <T> BaseResponse<T> create(ErrorMsg value) {
-        return new BaseResponse<>(value);
+    public static <T> Response<T> of(ErrorMsg value) {
+        return new Response<>(value);
+    }
+
+    public static <T> Response<T> error(String errorMsg) {
+        return new Response<>(ErrorMsg.of(errorMsg));
     }
 }

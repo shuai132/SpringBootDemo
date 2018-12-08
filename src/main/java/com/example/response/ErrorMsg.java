@@ -1,7 +1,12 @@
 package com.example.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ErrorMsg {
     @JsonProperty("code")
     private final int code;
@@ -9,8 +14,11 @@ public class ErrorMsg {
     @JsonProperty("message")
     private final String message;
 
-    public ErrorMsg(int code, String message) {
-        this.code = code;
-        this.message = message;
+    public static ErrorMsg of(int code, String message) {
+        return new ErrorMsg(code, message);
+    }
+
+    public static ErrorMsg of(String message) {
+        return new ErrorMsg(0, message);
     }
 }

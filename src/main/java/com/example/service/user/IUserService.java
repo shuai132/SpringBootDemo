@@ -1,16 +1,22 @@
 package com.example.service.user;
 
-import com.example.response.BaseResponse;
-import com.example.controller.user.type.User;
-import com.example.controller.user.type.UserTablePage;
+import com.example.controller.user.type.UserName;
+import com.example.response.Response;
+import com.example.controller.user.type.UserParam;
 import com.example.db.entity.UserTable;
+import com.example.response.wrapper.ListResult;
+import com.example.response.wrapper.PageResult;
 
 public interface IUserService {
-    BaseResponse<UserTable> getUserById(Long id);
+    Response<UserTable> getById(Long id);
 
-    BaseResponse<UserTablePage> getUsers(int page, int size);
+    Response<PageResult<UserTable>> getPage(int page, int size);
 
-    BaseResponse<Long> addUser(User user);
+    Response<Long> add(UserParam param);
 
-    BaseResponse<Long> deleteUser(Long id);
+    Response<Long> delete(Long id);
+
+    Response<Long> patch(Long id, UserParam param);
+
+    Response<ListResult<UserName>> list();
 }
