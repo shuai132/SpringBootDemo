@@ -24,12 +24,16 @@ docker-compose up -d
 1. 修改application.yml中`spring.datasource`的数据库配置
 2. 创建数据库
 ```mysql
-CREATE DATABASE IF NOT EXISTS SpringBootDemo CHARSET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS SpringBootDemo CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 ```
 ## 2. 运行
 ```bash
 ./gradlew bootRun
 ```
+
+## 3. 查看API
+* <http://localhost:8081/swagger-ui.html>
+* <http://localhost:8081/api-docs>
 
 # 默认配置说明
 在项目同级目录下会创建"SpringBootDemo_DATA"文件夹，用于存放日志和相关docker宿主目录绑定。
