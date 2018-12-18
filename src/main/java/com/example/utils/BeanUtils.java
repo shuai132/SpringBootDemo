@@ -9,6 +9,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static org.springframework.beans.BeanUtils.getPropertyDescriptor;
@@ -26,7 +27,7 @@ public final class BeanUtils {
         }
     }
 
-    public static <T> List<T> convertList(List<?> list, Class<T> clazz) {
+    public static <T> List<T> convertList(Collection<?> list, Class<T> clazz) {
         try {
             var results = new ArrayList<T>(list.size());
             list.forEach(v -> results.add(convert(v, clazz)));
