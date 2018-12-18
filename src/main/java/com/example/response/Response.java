@@ -1,9 +1,11 @@
 package com.example.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Response<T> {
     @JsonProperty("data")
     private final T data;
@@ -34,7 +36,24 @@ public class Response<T> {
         return new Response<>(value);
     }
 
+    public static Response<String> ok() {
+        return new Response<>("ok");
+    }
+
     public static <T> Response<T> error(String errorMsg) {
         return new Response<>(ErrorMsg.of(errorMsg));
+    }
+
+    public static <T> T threwError(String msg) throws RuntimeException {
+        throw new RespException(msg);
+    }
+
+    public static class RespException extends RuntimeException {
+        public RespException() {
+            super();
+        }
+        public RespException(String msg) {
+            super(msg);
+        }
     }
 }

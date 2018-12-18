@@ -29,6 +29,9 @@ public final class ExceptionHelper {
         try {
             T t = result.get();
             return Response.of(t);
+        } catch (Response.RespException e){
+            logger.error(e.getMessage());
+            return Response.error(e.getMessage());
         } catch (Exception e) {
             logger.error(e.toString(), e);
             return Response.of(errorMsg != null ? errorMsg : ErrorMsg.of(e.getMessage()));

@@ -4,14 +4,16 @@ import com.example.utils.BeanUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class PageResult<T> {
+public final class PageResult<T> {
     @JsonProperty("total_pages")
     private int totalPages;
 
