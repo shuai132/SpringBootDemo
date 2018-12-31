@@ -9,6 +9,8 @@ import lombok.Setter;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -31,11 +33,15 @@ public final class PageResult<T> {
         return new PageResult<>(totalPages, totalElements, data);
     }
 
-    public static <T> PageResult<T> of(Page<?> page, Class<T> clazz) {
+    public static <T, U> PageResult<T> of(Page<U> page, Function<U, T> converter) {
         return PageResult.of(
                 page.getTotalPages(),
                 page.getTotalElements(),
-                BeanUtils.convertList(page.getContent(), clazz)
+                page.getContent().stream().map(converter).collect(Collectors.toList())
         );
+    }
+
+    public static <T> PageResult<T> of(Page<?> page, Class<T> clazz) {
+        return PageResult.of(page, item -> BeanUtils.convert(item, clazz));
     }
 }
