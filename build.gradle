@@ -16,24 +16,21 @@ apply plugin: 'io.spring.dependency-management'
 
 group = 'com.example'
 version = '0.0.1'
-sourceCompatibility = 1.11
-targetCompatibility = 1.11
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     maven {
         url "http://maven.aliyun.com/nexus/content/groups/public/"
     }
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-jdbc")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-devtools")
-
-    implementation("mysql:mysql-connector-java")
 
     implementation("com.google.guava:guava:27.0.1-jre")
 
@@ -45,4 +42,6 @@ dependencies {
     implementation "org.projectlombok:lombok:${lombokVersion}"
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testImplementation "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation 'net.java.dev.jna:jna:5.2.0'
 }
