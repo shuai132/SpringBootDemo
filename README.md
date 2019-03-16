@@ -12,28 +12,45 @@ SpringBoot RESTful API的例子，组织工程架构，作为基础工程使用�
 # 开发构建环境
 * OpenJDK 11
 * Gradle 5.0
+* Docker
 
-# 使用说明
-## 1. 配置数据库
-* 方法一: 使用Docker(推荐)
+# 开发环境配置
+首先创建docker环境变量:
 ```bash
-cd docker/mysql
-docker-compose up -d
+cp .example.env .env
 ```
-* 方法二: 使用已有数据库
-1. 修改application.yml中`spring.datasource`的数据库配置
-2. 创建数据库
-```mysql
-CREATE DATABASE IF NOT EXISTS SpringBootDemo CHARSET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+## 1. 配置数据库和Redis
+```bash
+docker-compose up -d mysql redis
 ```
-## 2. 运行
+## 2. IDE插件
+* IDE需配置Lombok相关插件，并开启Java注解处理器(Enable annotation processors)。
+## 3. 运行
+使用IDE或直接执行:
 ```bash
 ./gradlew bootRun
 ```
 
 ## 3. 查看API
-* <http://localhost:8081/swagger-ui.html>
-* <http://localhost:8081/api-docs>
+* <http://localhost:8080/swagger-ui.html>
+* <http://localhost:8080/api-docs>
+
+# 使用Docker部署
+为了充分利用gradle缓存，分为编译和构建镜像两步。
+## 1. 编译
+方式一：使用Docker
+```bash
+docker-compose -f docker-compose-gradle.yml up
+```
+方式二：本地有JDK11环境
+```bash
+./gradlew assemble
+```
+## 2. 构建运行
+```bash
+docker-compose up -d --build
+```
+映射的端口：API:8080，MySQL:3406，Redis:6479。
 
 # 默认配置说明
 在项目同级目录下会创建"SpringBootDemo_DATA"文件夹，用于存放日志和相关docker宿主目录绑定。

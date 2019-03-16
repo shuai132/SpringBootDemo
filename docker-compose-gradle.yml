@@ -1,0 +1,10 @@
+version: "3"
+services:
+  gradle:
+    container_name: SpringBootDemo_Gradle
+    image: openjdk:11-jre-slim
+    volumes:
+      - ~/.gradle/:/root/.gradle/
+      - .:/app
+    working_dir: /app
+    command: ./gradlew assemble --no-daemon

@@ -1,0 +1,5 @@
+spring:
+  jpa:
+    show-sql: true
+logging:
+  file: ../PianoGradingInfo_DATA/logs/local.log

@@ -3,15 +3,18 @@ server:
 
 spring:
   profiles:
-    active: dev
+    active: local
   output:
     ansi:
       enabled: ALWAYS
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/SpringBootDemo?serverTimezone=Asia/Shanghai&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: 123456
+    url: jdbc:mysql://${MYSQL_URI:localhost:3406}/SpringBootDemo?serverTimezone=Asia/Shanghai&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:123456}
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6479}
   jpa:
     properties:
       hibernate:
@@ -28,3 +31,9 @@ logging:
   file: ../SpringBootDemo_DATA/logs/app.log
   level:
     root: INFO
+
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /api-docs

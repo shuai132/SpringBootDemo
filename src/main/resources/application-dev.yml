@@ -3,9 +3,3 @@ spring:
     show-sql: true
 logging:
   file: ../SpringBootDemo_DATA/logs/dev.log
-
-springfox:
-  documentation:
-    swagger:
-      v2:
-        path: /api-docs

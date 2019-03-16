@@ -1,0 +1,38 @@
+version: "3"
+services:
+
+  app:
+    container_name: SpringBootDemo_APP
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../SpringBootDemo_DATA/app:/SpringBootDemo_DATA
+    env_file:
+      - .env
+    restart: unless-stopped
+    depends_on:
+      - mysql
+      - redis
+
+  mysql:
+    container_name: SpringBootDemo_MySQL
+    build:
+      context: docker/mysql
+    ports:
+      - "3406:3306"
+    volumes:
+      - ../SpringBootDemo_DATA/mysql/logs:/logs
+      - ../SpringBootDemo_DATA/mysql/conf:/etc/mysql/conf.d
+      - ../SpringBootDemo_DATA/mysql/mysql:/var/lib/mysql
+    env_file:
+      - .env
+    restart: unless-stopped
+
+  redis:
+    container_name: SpringBootDemo_Redis
+    image: redis:5.0.2-alpine3.8
+    ports:
+      - "6479:6379"
+    restart: unless-stopped
