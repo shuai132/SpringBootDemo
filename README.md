@@ -4,7 +4,7 @@ SpringBootDemo
 SpringBoot RESTful API的例子，组织工程架构，作为基础工程使用。
 
 # 主要技术方案
-* SpringBoot 2.1.1.RELEASE
+* SpringBoot 2.x
 * MySQL 8.0
 * JPA
 * Swagger
