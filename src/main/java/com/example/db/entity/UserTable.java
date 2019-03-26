@@ -3,14 +3,16 @@ package com.example.db.entity;
 import com.example.utils.Const;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity(name = "user")
-@Data
+@Getter
+@Setter
 public class UserTable implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
