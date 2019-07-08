@@ -1,0 +1,27 @@
+language: java
+
+jdk:
+  - openjdk11
+
+services:
+  - docker
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+matrix:
+  include:
+    - name: "Native Build"
+      env: BUILD_SCRIPT="./gradlew assemble"
+    - name: "Docker Build"
+      env: BUILD_SCRIPT="docker-compose -f docker-compose-gradle.yml up"
+
+install: skip
+
+script:
+  - $BUILD_SCRIPT && cp .example.env .env && docker-compose build
